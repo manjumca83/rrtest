@@ -1,0 +1,5 @@
+GEM
+  remote: https://rubygems.org/
+    nokogiri (1.12.3)
+      mini_portile2 (~> 2.6.1)
+      racc (~>1.4)
