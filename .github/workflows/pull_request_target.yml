@@ -1,18 +1,13 @@
-require 'octokit'
-require 'dependabot/file_fetchers'
-require 'dependabot/source'
+name: Greetings
 
-target_repo_name = 'dependabot/dependabot-core'
-source = Dependabot::Source.new(provider: 'github', repo: target_repo_name)
+on: [pull_request, issues]
 
-client = Octokit::Client.new
-fetcher_class = Dependabot::FileFetchers::Ruby::Bundler
-filenames = client.contents(target_repo_name).map(&:name)
-
-unless fetcher_class.required_files_in?(filenames)
-  raise fetcher_class.required_files_message
-end
-
-fetcher = fetcher_class.new(source: source, credentials: [])
-
-puts "Fetched #{fetcher.files.map(&:name)}, at commit SHA-1 '#{fetcher.commit}'"
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Message that will be displayed on users'' first issue'
+        pr-message: 'Message that will be displayed on users'' first pr'
