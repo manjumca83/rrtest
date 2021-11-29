@@ -3,6 +3,7 @@ updates:
   - package-ecosystem: "bundler"
     open-pull-requests-limit: 10
     directory: "/"
+    insecure-external-code-execution: allow
     schedule:
       interval: "daily"
       # Check for npm updates at 9am UTC
